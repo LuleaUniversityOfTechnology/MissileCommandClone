@@ -19,8 +19,8 @@ void MissileBase::Draw()
 	if (this->IsDestroyed())
 		return;
 
-	std::string countText = "Ammo: " + std::to_string(this->missileCount);
-	Play::DrawDebugText(this->GetPosition() + Play::Vector2f(0, 16), countText.c_str(), Play::cGreen);
+	std::string countText = std::to_string(this->missileCount);
+	Play::DrawDebugText(this->GetPosition() + Play::Vector2f(6, -8), countText.c_str(), Play::cBlack);
 }
 
 void MissileBase::Simulate(float elapsedTime)

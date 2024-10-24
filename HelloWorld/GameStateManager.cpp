@@ -19,6 +19,12 @@ GameStateManager::~GameStateManager()
 
 void GameStateManager::Update(float elapsedTime)
 {
+	if (Play::KeyDown(Play::KEY_ENTER))
+	{
+		this->ClearGame();
+		this->NewGame();
+	}
+
 	this->timeSinceLastHostileMissile += elapsedTime;
 	// First, spawn incoming hostile missiles if necessary
 	if (this->timeSinceLastHostileMissile >= this->timeBetweenHostileMissiles)
@@ -134,6 +140,10 @@ void GameStateManager::ClearGame()
 		this->gameObjects = object->nextActiveGameObject;
 		delete object;
 	}
+
+	this->timeSinceLastHostileMissile = 0;
+	this->timeBetweenHostileMissiles = 3.0f;
+	this->missileSpeed = 10.0f;
 }
 
 void GameStateManager::NewGame()
@@ -144,25 +154,17 @@ void GameStateManager::NewGame()
 
 	for (size_t i = 0; i < 6; i++)
 	{
-		int offset = this->worldWidth / 9;
+		int offset = this->worldWidth / 7;
 		City* city = new City();
 		city->SetPosition(Play::Point2D(float(i) * offset + offset, groundLevel));
 		this->AddGameObject(city);
 	}
 
+	for (size_t i = 0; i < 3; i++)
 	{
+		float offset = ((float)this->worldWidth / 7.0f);
 		MissileBase* base = new MissileBase();
-		base->SetPosition(Play::Point2D(this->worldWidth / 2, groundLevel));
-		this->AddGameObject(base);
-	}
-	{
-		MissileBase* base = new MissileBase();
-		base->SetPosition(Play::Point2D(this->worldWidth / 5, groundLevel));
-		this->AddGameObject(base);
-	}
-	{
-		MissileBase* base = new MissileBase();
-		base->SetPosition(Play::Point2D((this->worldWidth / 5) * 4, groundLevel));
+		base->SetPosition(Play::Point2D((offset * i * 2.0f) + offset * 1.4f, groundLevel));
 		this->AddGameObject(base);
 	}
 }

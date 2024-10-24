@@ -30,9 +30,9 @@ private:
 	int worldWidth;
 	int worldHeight;
 
-	float timeSinceLastHostileMissile = 0;
-	float timeBetweenHostileMissiles = 3.0f;
-	float missileSpeed = 10.0f;
+	float timeSinceLastHostileMissile;
+	float timeBetweenHostileMissiles;
+	float missileSpeed;
 
 	const float groundLevel = 16.0f;
 

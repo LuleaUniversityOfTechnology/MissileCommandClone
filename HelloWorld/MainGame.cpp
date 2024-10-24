@@ -24,15 +24,6 @@ bool MainGameUpdate( float elapsedTime )
 	
 	state.Update(elapsedTime);
 
-	std::string frameTime = std::to_string(elapsedTime);
-	Play::DrawDebugText(Play::Point2D(32, DISPLAY_HEIGHT - 8), frameTime.c_str());
-
-	if (Play::KeyDown(KEY_ENTER))
-	{
-		state.ClearGame();
-		state.NewGame();
-	}
-
 	Play::PresentDrawingBuffer();
 	return Play::KeyDown( KEY_ESCAPE );
 }
